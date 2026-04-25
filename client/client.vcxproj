@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -54,6 +54,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
   </ImportGroup>
   <ImportGroup Label="Shared">
   </ImportGroup>
@@ -132,9 +133,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\core\core.cpp" />
     <ClCompile Include="src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\core\core.hpp" />
+    <ClInclude Include="src\core\memory\driver\driver_mode.hpp" />
+    <ClInclude Include="src\core\memory\memory.hpp" />
+    <ClInclude Include="src\core\memory\user\user_mode.hpp" />
+    <ClInclude Include="src\roblox\offset.hpp" />
+    <ClInclude Include="src\include.hpp" />
+    <ClInclude Include="src\roblox\sdk\instance.hpp" />
+    <ClInclude Include="src\roblox\sdk\render.hpp" />
+    <ClInclude Include="src\roblox\sdk\roblox.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="src\core\memory\user\user_mode.asm">
+      <FileType>Document</FileType>
+    </MASM>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
   </ImportGroup>
 </Project>

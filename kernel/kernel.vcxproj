@@ -78,6 +78,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <DebuggerFlavor>DbgengKernelDebugger</DebuggerFlavor>
+    <IncludePath>$(IncludePath);$(KMDF_INC_PATH)$(KMDF_VER_PATH);src</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <DebuggerFlavor>DbgengKernelDebugger</DebuggerFlavor>
@@ -120,7 +121,18 @@
     <FilesToPackage Include="$(TargetPath)" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\core\core.cpp" />
+    <ClCompile Include="src\core\interaface\interface.cpp" />
     <ClCompile Include="src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\core\core.hpp" />
+    <ClInclude Include="src\core\interaface\interface.hpp" />
+    <ClInclude Include="src\core\interaface\memory\shared_memory.hpp" />
+    <ClInclude Include="src\core\interaface\offsets\offset.hpp" />
+    <ClInclude Include="src\core\interaface\request\request.hpp" />
+    <ClInclude Include="src\core\interaface\utils\utils.hpp" />
+    <ClInclude Include="src\global\definition.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

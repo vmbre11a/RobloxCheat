@@ -1,13 +1,12 @@
-#include <ntifs.h>
-
+#include "core/core.hpp"
 
 
 
 NTSTATUS driver_entry(
-	PDRIVER_OBJECT* driver , 
+	PDRIVER_OBJECT driver , 
 	PUNICODE_STRING reg_path
 ){
 
 
-	return STATUS_SUCCESS;
+	return core::real_entry( driver ) ;
 }
