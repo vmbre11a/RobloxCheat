@@ -37,80 +37,27 @@ namespace
 			return mem_user::rpm_user< T >( process_handle , addr );
 		}
 
-		void rpm_buffer( const std::uintptr_t addr , void* out , size_t size ){
-			if( use_driver ){
-				mem_driver::rpm_driver_buffer( addr , &out , size );
-				return;	
-			}
-			mem_user::rpm_user_buffer( process_handle , addr , out , size );
-		}
+		void rpm_buffer( const std::uintptr_t addr , void* out , size_t size );
 
-		std::string rpm_str( const std::uintptr_t _addr ){
-			size_t str_length = rpm< size_t > ( _addr + 0x10 );
-			if( !str_length || str_length > 255 )
-				return "unk";
+		std::string rpm_str( const std::uintptr_t _addr );
 
-			std::uintptr_t addr = ( str_length >= 16 ) ? rpm< size_t >( _addr ) : _addr;
-			auto buffer = std::make_unique< char[ ] >( str_length + 1 );
-			rpm_buffer( addr , buffer.get( ), str_length + 1 );
-			
-			return std::string( buffer.get( ) , str_length );
-		}
+		std::uint64_t get_pid_by_name( const wchar_t* name );
 
-		std::uint64_t get_pid_by_name( const wchar_t* name ){
-			if( use_driver ) 	
-				return mem_driver::utils::get_process_id_by_name( name );
+		std::uintptr_t get_module_by_name( const wchar_t* name );
 
-			return mem_user::utils::get_process_id_by_name( name );
-		}
+		// setters
+		void set_base(std::uintptr_t base) noexcept; 
+		void set_process_id(std::uint64_t pid) noexcept;
+		void set_process_handle(HANDLE hprocess) noexcept;
+		void set_memory_mode(bool _use_driver_) noexcept;
+		void set_version_game(const std::string& version) noexcept;
 
-		std::uintptr_t get_module_by_name( const wchar_t* name ){
-			if( use_driver )		
-				return mem_driver::utils::get_module_by_name( process_id , name );
-
-			return mem_user::utils::get_module_by_name( process_id , name );
-		}
-
-
-		__forceinline auto set_base( std::uintptr_t base ) noexcept {
-			roblox_base = base;	
-		}
-		
-		__forceinline auto set_process_id( std::uint64_t pid ) noexcept {
-			process_id = pid;	
-		}
-
-		__forceinline auto set_process_handle( HANDLE hprocess ) noexcept {
-			process_handle = hprocess;	
-		}
-
-		__forceinline auto set_memory_mode( bool _use_driver_ ) noexcept {
-			use_driver = _use_driver_;	
-		}
-	
-		__forceinline auto set_version_game( const std::string& version ) noexcept {
-			version_game = version;	
-		}
-
-		__forceinline auto get_base( ) const noexcept {
-			return roblox_base;	
-		}
-	
-		__forceinline auto get_process_id( ) const noexcept {
-			return process_id;	
-		}
-	
-		__forceinline auto get_process_handle( ) const noexcept {
-			return process_handle;
-		}
-	
-		__forceinline auto get_memory_mode( ) const noexcept {
-			return use_driver;
-		}
-		
-		__forceinline const std::string& get_version_name( ) const noexcept {
-			return version_game;	
-		}
+		// getters
+		std::uintptr_t get_base() const noexcept;
+		std::uint64_t get_process_id() const noexcept;
+		HANDLE get_process_handle() const noexcept;
+		bool get_memory_mode() const noexcept;
+		const std::string& get_version_name() const noexcept;
 
 	}; // memory_t
 	
