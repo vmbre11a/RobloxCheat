@@ -1,6 +1,11 @@
 #pragma once
 
-#include "../offset.hpp"
+#include "../../offset.hpp"
+
+#include "../math/cframe.hpp"
+
+#include "../math/vec2.hpp"
+
 
 namespace
 	sdk{
@@ -31,6 +36,31 @@ namespace
 				std::uintptr_t name = memory::mem->rpm< std::uintptr_t >( desc + offsets::ClassDescriptorToClassName );
 				return memory::mem->rpm_str( name );
 			}
+			
+			std::uintptr_t get_primitive( ){
+				return memory::mem->rpm< std::uintptr_t >( 
+					self + offsets::Primitive );
+			}
+
+			geom::vec3 get_pos( ){
+				std::uintptr_t primitive = get_primitive( );
+				return memory::mem->rpm< geom::vec3 >( 
+					primitive + offsets::Position );
+			}
+
+			float get_distance( const geom::vec3& target ) {
+				auto current = get_pos( );
+				return ( current - target ).get_length( );
+			}
+
+			instance_t get_model_ref( ){
+				return instance_t( memory::mem->rpm< std::uintptr_t >( 
+					self + offsets::ModelInstance ) );			
+			}
+
+			instance_t get_parent( ){
+				return instance_t( memory::mem->rpm< std::uintptr_t >( self + offsets::Parent ) );	
+			}
 
 			std::vector< instance_t > get_childs( ){
 				std::vector< instance_t > childs;
@@ -45,7 +75,6 @@ namespace
 
 				return childs;
 			}
-
 
 			instance_t get_by_name( const std::string& target_name ){
 				auto child = this->get_childs( );

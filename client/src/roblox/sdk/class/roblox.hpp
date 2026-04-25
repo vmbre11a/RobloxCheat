@@ -65,7 +65,7 @@ namespace
 				instance::instance_t& get_workspace( ) { return workspace; }
 				instance::instance_t& get_camera( ) { return camera; }
 				instance::instance_t& get_local_player( ) { return local_player; }
-				render::render_t&	  get_render_engihne( ){ return render_engine; }
+				render::render_t&	  get_render_engine( ){ return render_engine; }
 			};   
 
 		inline std::unique_ptr< roblox_t >rbx = std::make_unique< roblox_t >( );
