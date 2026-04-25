@@ -4,7 +4,10 @@
 
 #include "memory/memory.hpp"
 
-#include "roblox/sdk/roblox.hpp"
+#include "roblox/sdk/class/roblox.hpp"
+
+#include "overlay/overlay.hpp"
+
 
 namespace
 	core{
@@ -41,8 +44,10 @@ namespace
 				base );
 
 			
-		sdk::roblox::rbx->init( base );
-		
+		sdk::roblox::rbx->init( base ); // get base addr
+
+		overlay::menu->render_loop( ); // start render ( main loop )
+
 		return true;
 	}	
 
