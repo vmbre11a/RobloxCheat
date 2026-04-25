@@ -21,6 +21,33 @@
     <ClCompile Include="src\core\core.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\memory\memory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\overlay\overlay.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ext\imgui\imgui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ext\imgui\imgui_demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ext\imgui\imgui_draw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ext\imgui\imgui_impl_dx11.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ext\imgui\imgui_impl_win32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ext\imgui\imgui_tables.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ext\imgui\imgui_widgets.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\core.hpp">
@@ -41,13 +68,52 @@
     <ClInclude Include="src\roblox\offset.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\roblox\sdk\instance.hpp">
+    <ClInclude Include="src\roblox\sdk\class\instance.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\roblox\sdk\render.hpp">
+    <ClInclude Include="src\roblox\sdk\class\render.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\roblox\sdk\roblox.hpp">
+    <ClInclude Include="src\roblox\sdk\class\roblox.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\roblox\sdk\math\cframe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\roblox\sdk\math\vec2.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\roblox\sdk\math\vec3.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\roblox\sdk\math\cframe.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\overlay\overlay.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\imgui\imconfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\imgui\imgui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\imgui\imgui_impl_dx11.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\imgui\imgui_impl_win32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\imgui\imgui_internal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\imgui\imstb_rectpack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\imgui\imstb_textedit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\imgui\imstb_truetype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

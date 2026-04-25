@@ -8,7 +8,7 @@ namespace
 
 	NTSTATUS real_entry( PDRIVER_OBJECT driver , PUNICODE_STRING reg_path ){
 
-
+		
 
 	} // real_entry 
 
