@@ -47,9 +47,6 @@ LRESULT WINAPI Window_Procedure(HWND hWindoww, UINT message, WPARAM wParam, LPAR
 	return ::DefWindowProcW(hWindoww, message, wParam, lParam);
 }
 
-
-
-
 overlay::overlay_t::overlay_t( ){
 
 	wc = { sizeof( WNDCLASSEXW ) };
@@ -184,6 +181,14 @@ void overlay::overlay_t::render()
 	ImGui::Checkbox("player" , &config::esp::esp.player );
 	ImGui::Checkbox("player box " , &config::esp::esp.player_box );	
 
+
+	auto color_edit = []( const char* label, config::esp::imvec4& color ) {
+		if (ImGui::ColorEdit4(label, (float*)&color, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha))
+			cache::color::dirty_make();
+	};
+
+	color_edit( "player_box " , config::esp::esp.c_player_box );
+
 	ImGui::End( );
 }
 
@@ -210,6 +215,8 @@ void overlay::overlay_t::render_loop( ){
 
 		auto now = std::chrono::steady_clock::now( );
 
+
+		if( cache::color::dirty ) cache::color::update( );
 
 		auto elapse_player_cache = std::chrono::duration_cast< std::chrono::seconds >( now - last_update_player_cache ).count( );
 	
