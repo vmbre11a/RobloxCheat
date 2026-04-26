@@ -6,6 +6,9 @@
 
 #include "user/user_mode.hpp"// for wpm/rpm
 
+#include "roblox/sdk/math/vec2.hpp"
+
+
 namespace
 	memory{
 
@@ -20,6 +23,8 @@ namespace
 		bool use_driver{ }; // you use: false = use_usermode ( NtReadVirtualMemory )
 
 		std::string version_game{ }; // verify offsets
+
+		geom::vec2 screen_size{ }; 
 
 	public:
 		memory_t( ){ }
@@ -44,13 +49,14 @@ namespace
 		std::uint64_t get_pid_by_name( const wchar_t* name );
 
 		std::uintptr_t get_module_by_name( const wchar_t* name );
-
+		
 		// setters
 		void set_base(std::uintptr_t base) noexcept; 
 		void set_process_id(std::uint64_t pid) noexcept;
 		void set_process_handle(HANDLE hprocess) noexcept;
 		void set_memory_mode(bool _use_driver_) noexcept;
 		void set_version_game(const std::string& version) noexcept;
+		void set_screen_size( const geom::vec2 new_screen ) noexcept;
 
 		// getters
 		std::uintptr_t get_base() const noexcept;
@@ -58,7 +64,7 @@ namespace
 		HANDLE get_process_handle() const noexcept;
 		bool get_memory_mode() const noexcept;
 		const std::string& get_version_name() const noexcept;
-
+		const geom::vec2 get_screen_size( ) const noexcept;
 	}; // memory_t
 	
 	

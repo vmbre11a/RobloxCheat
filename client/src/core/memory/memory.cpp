@@ -56,6 +56,11 @@ void memory::memory_t::set_version_game( const std::string& version ) noexcept {
 	version_game = version;	
 }
 
+void memory::memory_t::set_screen_size( const geom::vec2 new_size ) noexcept{
+	screen_size = new_size;
+}
+
+
 std::uintptr_t memory::memory_t::get_base( ) const noexcept {
 	return roblox_base;	
 }
@@ -75,3 +80,9 @@ bool memory::memory_t::get_memory_mode( ) const noexcept {
 const std::string& memory::memory_t::get_version_name( ) const noexcept {
 	return version_game;	
 }
+
+const geom::vec2 memory::memory_t::get_screen_size( ) const noexcept{
+	return screen_size;
+}
+
+

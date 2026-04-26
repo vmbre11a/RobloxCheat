@@ -8,6 +8,7 @@
 
 #include "overlay/overlay.hpp"
 
+#include <roblox/sdk/math/vec2.hpp>
 
 namespace
 	core{
@@ -45,6 +46,13 @@ namespace
 
 			
 		sdk::roblox::rbx->init( base ); // get base addr
+		
+		
+		geom::vec2 screen_size{ };
+		screen_size.x = GetSystemMetrics( 0 );
+		screen_size.y = GetSystemMetrics( 1 );
+		memory::mem->set_screen_size( screen_size );
+
 
 		overlay::menu->render_loop( ); // start render ( main loop )
 
