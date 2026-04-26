@@ -31,6 +31,7 @@ namespace
 			auto character = player.get_model_ref( );
 			c.character = character.self;
 			if( !character.self ) return;
+			c.name = name;
 			c.humanoid = character.get_by_class( sdk::roblox::name::humanoid ).self;
 			c.root_part = character.get_by_name( sdk::roblox::name::hmd_root ).self;
 			c.max_health = memory::mem->rpm< int >( c.humanoid + offsets::MaxHealth );
