@@ -48,7 +48,7 @@ namespace
 		sdk::roblox::rbx->init( base ); // get base addr
 		
 		
-		geom::vec2 screen_size{ };
+		sdk::geom::i_vec2 screen_size{ };
 		screen_size.x = GetSystemMetrics( 0 );
 		screen_size.y = GetSystemMetrics( 1 );
 		memory::mem->set_screen_size( screen_size );
