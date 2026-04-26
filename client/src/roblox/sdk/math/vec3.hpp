@@ -2,6 +2,9 @@
 
 #include <cmath>
 
+
+namespace 
+	sdk{ 
 namespace
 	geom{
 
@@ -39,4 +42,6 @@ namespace
 
 	typedef geom::vec3_tpl< float >					vec3;
 } // geom
+
+} // sdk
 

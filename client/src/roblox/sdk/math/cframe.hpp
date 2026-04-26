@@ -2,6 +2,8 @@
 
 #include "vec3.hpp"
 
+
+namespace sdk{ 
 namespace
 	geom{
 
@@ -31,4 +33,5 @@ namespace
 	typedef cframe_tpl< float >		cframe;
 } // geom
 
+} // sdk
 

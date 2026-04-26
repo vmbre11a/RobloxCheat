@@ -1,13 +1,16 @@
 #pragma once
 
-
-namespace 
-	geom{ 
-
-template< typename T > 
-struct mat4_tpl{
-	T data[ 16 ];
-};
+namespace
+	sdk{ 
+	namespace 
+		geom{ 
 	
-	typedef mat4_tpl< float >			mat4;
-} // geom
+		template< typename T > 
+		struct mat4_tpl{
+			T data[ 16 ];
+		};
+			
+			typedef mat4_tpl< float >			mat4;
+	} // geom
+
+} // sdk

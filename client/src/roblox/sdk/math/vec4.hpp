@@ -1,5 +1,7 @@
 #pragma once
 
+namespace 
+	sdk{
 
 namespace
 	geom{
@@ -39,5 +41,4 @@ namespace
 
 	typedef vec4_tpl< float >		vec4;
 } // geom
-
-
+} // sdk
