@@ -8,8 +8,16 @@
 
 #include <imgui/imgui_impl_dx11.h>
 
-
 #include <dwmapi.h>
+
+#include <core/config/config.hpp>
+
+#include <roblox/sdk/cache/color_cache.hpp>
+
+#include <roblox/sdk/cache/player_cache.hpp>
+
+
+#include <core/features/esp/esp.hpp>
 
 #pragma comment(lib,"d3d11.lib")
 
@@ -173,7 +181,8 @@ void overlay::overlay_t::render()
 		ImGuiWindowFlags_NoResize
 	);
 
-	
+	ImGui::Checkbox("player" , &config::esp::esp.player );
+	ImGui::Checkbox("player box " , &config::esp::esp.player_box );	
 
 	ImGui::End( );
 }
@@ -183,6 +192,10 @@ void overlay::overlay_t::render_loop( ){
 	MSG msg{ };
 	RtlZeroMemory( &msg , sizeof( msg ) );
 
+
+	auto last_update_player_cache = std::chrono::steady_clock::now( );
+
+	cache::player::update( ); // no wait first delay
 	while( 1 ){
 
 		if( PeekMessage( &msg , nullptr , 0 , 0 , PM_REMOVE ) ){
@@ -195,7 +208,18 @@ void overlay::overlay_t::render_loop( ){
 
 		start_render( );
 
-		// my
+		auto now = std::chrono::steady_clock::now( );
+
+
+		auto elapse_player_cache = std::chrono::duration_cast< std::chrono::seconds >( now - last_update_player_cache ).count( );
+	
+		if( elapse_player_cache >= 7 ){
+			cache::player::update( );
+		}
+
+		// your function
+
+		features::esp::whack->main_loop( );
 
 		if( show_menu ) render( );
 
