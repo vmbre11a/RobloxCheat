@@ -41,7 +41,7 @@ void features::esp::wallhack_t::main_loop( sdk::render::render_t render ){
 		imvec2 bottom_right = { head_pos.x + width / 2.0f, feet_pos.y };
 
 		if( esp.player_box ){
-			draw_2d_box( draw , top_left , bottom_right , cache::color::player_box );
+			draw_box( draw , top_left , bottom_right , cache::color::player_box );
 		}
 	}
 }

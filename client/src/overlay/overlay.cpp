@@ -170,6 +170,15 @@ void overlay::overlay_t::end_render()
 
 void overlay::overlay_t::render()
 {
+	auto color_edit = []( const char* label, config::esp::imvec4& color ) {
+		if (ImGui::ColorEdit4(label, (float*)&color, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha))
+			cache::color::dirty_make();
+	};
+
+	auto combo = []( const char* label, int& selected, const char** items , int count ) {
+		 ImGui::Combo(label, &selected, items, count );
+	};
+
 	ImGui::SetNextWindowSize(ImVec2(410, 410), ImGuiCond_Once);
 	ImGui::SetNextWindowBgAlpha(0.90f); 
 	ImGui::Begin("##Windows", nullptr,
@@ -177,26 +186,27 @@ void overlay::overlay_t::render()
 		ImGuiWindowFlags_NoCollapse |
 		ImGuiWindowFlags_NoResize
 	);
-
+	
+	// check box
 	ImGui::Checkbox("player" , &config::esp::esp.player );
 	ImGui::Checkbox("player box " , &config::esp::esp.player_box );	
 
+	ImGui::SliderFloat("box_filled" , &config::esp::esp.player_box_filled , 0.1f , 0.9f );
 
-	auto color_edit = []( const char* label, config::esp::imvec4& color ) {
-		if (ImGui::ColorEdit4(label, (float*)&color, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha))
-			cache::color::dirty_make();
-	};
+	// combo
+	static const char* box_selected[ ] = { "2d" , "2d filled " };
 
+	combo( "box_style" , config::esp::esp.player_box_selected , box_selected , IM_ARRAYSIZE( box_selected ) );
+
+	// color
 	color_edit( "player_box " , config::esp::esp.c_player_box );
 
 	ImGui::End( );
 }
 
 void overlay::overlay_t::render_loop( ){
-
 	MSG msg{ };
 	RtlZeroMemory( &msg , sizeof( msg ) );
-
 
 	auto last_update_player_cache = std::chrono::steady_clock::now( );
 
@@ -215,9 +225,8 @@ void overlay::overlay_t::render_loop( ){
 
 		auto now = std::chrono::steady_clock::now( );
 
-
 		if( cache::color::dirty ) cache::color::update( );
-
+		
 		auto elapse_player_cache = std::chrono::duration_cast< std::chrono::seconds >( now - last_update_player_cache ).count( );
 	
 		if( elapse_player_cache >= 7 ){
@@ -225,7 +234,6 @@ void overlay::overlay_t::render_loop( ){
 		}
 
 		// your function
-
 		features::esp::whack->main_loop( );
 
 		if( show_menu ) render( );
@@ -234,7 +242,6 @@ void overlay::overlay_t::render_loop( ){
 
 		d3_swap->Present( 0 , 0 );
 
-		
 		std::this_thread::sleep_for( std::chrono::milliseconds( 9 ) );
 	}
 }

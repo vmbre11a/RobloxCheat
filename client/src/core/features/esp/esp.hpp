@@ -19,8 +19,11 @@ namespace
 		private:
 			
 			void draw_2d_box( imdraw_list* draw , imvec2 top_left , imvec2 bottom_right , imcolor color );
+			void draw_2d_filled_box( imdraw_list* draw , imvec2 top_left , imvec2 bottom_right , imcolor color );
 
 
+
+			void draw_box( imdraw_list* draw , imvec2 top_left , imvec2 bottom_right , imcolor );
 
 		public: 
 			void main_loop( );
