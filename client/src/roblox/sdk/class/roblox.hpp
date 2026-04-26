@@ -1,5 +1,9 @@
 #pragma once 
+
 #include "render.hpp" // render.hpp include instance
+
+#include "roblox_name.hpp"
+
 
 namespace
 	sdk{
@@ -7,16 +11,7 @@ namespace
 	
 	namespace 
 		roblox{
-	
 		
-		namespace 
-			name{ 
-			inline const char* work_space =			"Workspace";
-			inline const char* players =			"Players";
-			inline const char* camera =				"Camera";
-			inline const char* humanoid =			"Humanoid";
-			inline const char* hmd_root =			"HumanoidRootPart";
-		}
 		class roblox_t{
 		private:
 			instance::instance_t local_player{ };
