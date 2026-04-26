@@ -42,7 +42,7 @@ namespace
 	};
 
 	typedef geom::vec2_tpl< float >					vec2;
-
+	typedef geom::vec2_tpl< int >					i_vec2;
 } // geom 
 
 } // sdk 

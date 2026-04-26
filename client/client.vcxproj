@@ -143,7 +143,10 @@
     <ClCompile Include="ext\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="ext\imgui\imgui_tables.cpp" />
     <ClCompile Include="ext\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="src\core\config\config.hpp" />
     <ClCompile Include="src\core\core.cpp" />
+    <ClCompile Include="src\core\features\esp\esp.cpp" />
+    <ClCompile Include="src\core\features\esp\render\render.cpp" />
     <ClCompile Include="src\core\memory\memory.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\overlay\overlay.cpp" />
@@ -158,19 +161,25 @@
     <ClInclude Include="ext\imgui\imstb_textedit.h" />
     <ClInclude Include="ext\imgui\imstb_truetype.h" />
     <ClInclude Include="src\core\core.hpp" />
+    <ClInclude Include="src\core\features\esp\esp.hpp" />
     <ClInclude Include="src\core\memory\driver\driver_mode.hpp" />
     <ClInclude Include="src\core\memory\memory.hpp" />
     <ClInclude Include="src\core\memory\user\user_mode.hpp" />
     <ClInclude Include="src\overlay\overlay.hpp" />
     <ClInclude Include="src\roblox\offset.hpp" />
     <ClInclude Include="src\include.hpp" />
+    <ClInclude Include="src\roblox\sdk\cache\color_cache.hpp" />
+    <ClInclude Include="src\roblox\sdk\cache\player_cache.hpp" />
     <ClInclude Include="src\roblox\sdk\class\instance.hpp" />
     <ClInclude Include="src\roblox\sdk\class\render.hpp" />
+    <ClInclude Include="src\roblox\sdk\class\roblox_name.hpp" />
     <ClInclude Include="src\roblox\sdk\class\roblox.hpp" />
     <ClInclude Include="src\roblox\sdk\math\cframe.h" />
     <ClInclude Include="src\roblox\sdk\math\cframe.hpp" />
+    <ClInclude Include="src\roblox\sdk\math\mat4.hpp" />
     <ClInclude Include="src\roblox\sdk\math\vec2.hpp" />
     <ClInclude Include="src\roblox\sdk\math\vec3.hpp" />
+    <ClInclude Include="src\roblox\sdk\math\vec4.hpp" />
   </ItemGroup>
   <ItemGroup>
     <MASM Include="src\core\memory\user\user_mode.asm">

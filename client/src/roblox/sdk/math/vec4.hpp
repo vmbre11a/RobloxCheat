@@ -36,7 +36,7 @@ namespace
 			return vec4_tpl( x - a.x , y - a.y , z - a.z , w - a.w );
 		}
 
-		bool is_zero( ) const noexcept { return x == 0 && y == 0 && z == 0; w == 0}
+		bool is_zero( ) const noexcept { return x == 0 && y == 0 && z == 0; w == 0; }
 	};
 
 	typedef vec4_tpl< float >		vec4;
