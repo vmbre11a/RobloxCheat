@@ -26,7 +26,11 @@ namespace
 	}
 
 	inline void rpm_driver_buffer( const std::uintptr_t addr , void* out , size_t size ) {
-			
+
 	};
+
+	inline void mouse_move_driver( float x , float ){
+
+	}
 
 }// mem_driver

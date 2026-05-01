@@ -50,6 +50,8 @@ namespace
 
 		std::uintptr_t get_module_by_name( const wchar_t* name );
 
+		void move_mouse( float x , float y );
+
 		__forceinline bool is_valid( const std::uintptr_t addr ){
 			if( addr >= 0x1000 && addr <= 0x7FFFFFFEFFFF )
 				return true;

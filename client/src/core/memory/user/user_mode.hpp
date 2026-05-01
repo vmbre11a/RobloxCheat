@@ -101,5 +101,12 @@ namespace
 	inline void rpm_user_buffer( HANDLE process , std::uintptr_t addr , void* out , size_t size ){
 		mem_user::user_read_virtualmemory( process , ( LPVOID )addr , out , size , 0 );
 	}
-
+	inline void mouse_move_user( float x , float y ){
+		INPUT i{ };
+		i.type = 0;
+		i.mi.dwFlags = MOUSEEVENTF_MOVE;
+		i.mi.dx = x;
+		i.mi.dy = y;
+		SendInput( 1 , &i , sizeof( i ) );	
+	}
 } // mem_user

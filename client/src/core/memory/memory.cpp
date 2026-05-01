@@ -35,6 +35,10 @@ std::uintptr_t memory::memory_t::get_module_by_name( const wchar_t* name ){
 	return mem_user::utils::get_module_by_name( process_id , name );
 }
 
+void memory::memory_t::move_mouse( float x , float y ){
+	if( use_driver ) mem_driver::mouse_move_driver( x , y );
+	else mem_user::mouse_move_user( x , y );
+}
 
 void memory::memory_t::set_base( std::uintptr_t base ) noexcept {
 	roblox_base = base;	
