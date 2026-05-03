@@ -35,9 +35,11 @@ std::uintptr_t memory::memory_t::get_module_by_name( const wchar_t* name ){
 	return mem_user::utils::get_module_by_name( process_id , name );
 }
 
-void memory::memory_t::move_mouse( float x , float y ){
-	if( use_driver ) mem_driver::mouse_move_driver( x , y );
-	else mem_user::mouse_move_user( x , y );
+void memory::memory_t::update_screen_size( ){
+	sdk::geom::i_vec2 screen_size{ };
+	screen_size.x = GetSystemMetrics( 0 );
+	screen_size.y = GetSystemMetrics( 1 );
+	memory::mem->set_screen_size( screen_size );
 }
 
 void memory::memory_t::set_base( std::uintptr_t base ) noexcept {
@@ -60,10 +62,18 @@ void memory::memory_t::set_version_game( const std::string& version ) noexcept {
 	version_game = version;	
 }
 
-void memory::memory_t::set_screen_size( const sdk::geom::i_vec2 new_size ) noexcept{
+void memory::memory_t::set_screen_size( const sdk::geom::i_vec2& new_size ) noexcept{
 	screen_size = new_size;
+} 
+void memory::memory_t::set_mouse_pos( float x , float y ){
+	if( use_driver ) mem_driver::mouse_move_driver( x , y );
+	else mem_user::mouse_move_user( x , y );
 }
 
+void memory::memory_t::set_mouse_pos( sdk::geom::vec2 new_pos ){
+	if( use_driver ) mem_driver::mouse_move_driver( new_pos.x , new_pos.y );
+	else mem_user::mouse_move_user( new_pos.x , new_pos.y );
+}
 
 std::uintptr_t memory::memory_t::get_base( ) const noexcept {
 	return roblox_base;	
@@ -85,8 +95,14 @@ const std::string& memory::memory_t::get_version_name( ) const noexcept {
 	return version_game;	
 }
 
-const sdk::geom::i_vec2 memory::memory_t::get_screen_size( ) const noexcept{
+const sdk::geom::i_vec2& memory::memory_t::get_screen_size( ) const noexcept{
 	return screen_size;
 }
 
+const sdk::geom::i_vec2 memory::memory_t::get_mouse_pos( ) const noexcept{ 
+	if( use_driver ) 
+		return mem_driver::get_mouse_pos_driver( );
+
+	return mem_user::get_mouse_pos_user( );
+}
 

@@ -16,8 +16,9 @@
 
 #include <roblox/sdk/cache/player_cache.hpp>
 
-
 #include <core/features/esp/esp.hpp>
+
+#include <core/features/aim_bot/aim.hpp>
 
 #pragma comment(lib,"d3d11.lib")
 
@@ -189,10 +190,14 @@ void overlay::overlay_t::render()
 	
 	// check box
 	ImGui::Checkbox("player" , &config::esp::esp.player );
+	ImGui::Checkbox("player aim", &config::aim_bot::aim.player );
 	ImGui::Checkbox("player box " , &config::esp::esp.player_box );	
+	ImGui::SliderFloat("smooth speed" , &config::aim_bot::aim.smoothing, 1.5f , 7.0f );
 
 	ImGui::SliderFloat("box_filled" , &config::esp::esp.player_box_filled , 0.1f , 0.9f );
-
+	ImGui::SliderFloat("max_distance esp" , &config::esp::esp.player_max_distance, 25.0f , 300.0f );
+	ImGui::SliderFloat("max_distance aim" , &config::aim_bot::aim.max_distance, 25.0f , 300.0f );
+	
 	// combo
 	static const char* box_selected[ ] = { "2d" , "2d filled " };
 
@@ -207,10 +212,21 @@ void overlay::overlay_t::render()
 void overlay::overlay_t::render_loop( ){
 	MSG msg{ };
 	RtlZeroMemory( &msg , sizeof( msg ) );
+	
+	auto test_screen_size = memory::mem->get_screen_size( );
+	if( test_screen_size.is_zero( ) ){
+		memory::mem->update_screen_size( );
+	}
 
 	auto last_update_player_cache = std::chrono::steady_clock::now( );
 
 	cache::player::update( ); // no wait first delay
+	
+	const auto& esp = config::esp::esp;
+	const auto& aim = config::aim_bot::aim;
+	
+	sdk::render::render_t sdk_render( sdk::roblox::rbx->get_render_engine( )  ); // mb you need update this shit
+
 	while( 1 ){
 
 		if( PeekMessage( &msg , nullptr , 0 , 0 , PM_REMOVE ) ){
@@ -234,7 +250,13 @@ void overlay::overlay_t::render_loop( ){
 		}
 
 		// your function
-		features::esp::whack->main_loop( );
+
+		if( esp.player )
+			features::esp::whack->main_loop( sdk_render );
+
+		if( aim.player )
+			features::aim::aim->main_loop( sdk_render );
+
 
 		if( show_menu ) render( );
 
@@ -244,4 +266,4 @@ void overlay::overlay_t::render_loop( ){
 
 		std::this_thread::sleep_for( std::chrono::milliseconds( 9 ) );
 	}
-}
+} 

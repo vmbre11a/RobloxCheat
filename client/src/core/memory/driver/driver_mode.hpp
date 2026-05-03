@@ -2,6 +2,8 @@
 
 #include <include.hpp> 
 
+#include <roblox/sdk/math/vec2.hpp>
+
 namespace
 	mem_driver{
 
@@ -32,5 +34,7 @@ namespace
 	inline void mouse_move_driver( float x , float ){
 
 	}
-
+	inline sdk::geom::i_vec2 get_mouse_pos_driver( ){
+		return{ };
+	}
 }// mem_driver

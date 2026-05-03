@@ -145,6 +145,8 @@
     <ClCompile Include="ext\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\core\config\config.hpp" />
     <ClCompile Include="src\core\core.cpp" />
+    <ClCompile Include="src\core\features\aim_bot\aim.cpp" />
+    <ClCompile Include="src\core\features\esp\draw\draw.cpp" />
     <ClCompile Include="src\core\features\esp\esp.cpp" />
     <ClCompile Include="src\core\features\esp\render\render.cpp" />
     <ClCompile Include="src\core\memory\memory.cpp" />
@@ -161,6 +163,7 @@
     <ClInclude Include="ext\imgui\imstb_textedit.h" />
     <ClInclude Include="ext\imgui\imstb_truetype.h" />
     <ClInclude Include="src\core\core.hpp" />
+    <ClInclude Include="src\core\features\aim_bot\aim.hpp" />
     <ClInclude Include="src\core\features\esp\esp.hpp" />
     <ClInclude Include="src\core\memory\driver\driver_mode.hpp" />
     <ClInclude Include="src\core\memory\memory.hpp" />

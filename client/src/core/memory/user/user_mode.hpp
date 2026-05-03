@@ -4,7 +4,7 @@
 
 #include <tlhelp32.h>
 
-
+#include <roblox/sdk/math/vec2.hpp>
 
 namespace
 	mem_user{
@@ -105,8 +105,14 @@ namespace
 		INPUT i{ };
 		i.type = 0;
 		i.mi.dwFlags = MOUSEEVENTF_MOVE;
-		i.mi.dx = x;
-		i.mi.dy = y;
+		i.mi.dx = static_cast< LONG >( x );
+		i.mi.dy = static_cast< LONG >( y );
 		SendInput( 1 , &i , sizeof( i ) );	
+	}
+	
+	inline sdk::geom::i_vec2 get_mouse_pos_user( ){
+		POINT p;
+		GetCursorPos( &p );
+		return { static_cast< int >( p.x )  , static_cast< int > (p. y ) };
 	}
 } // mem_user

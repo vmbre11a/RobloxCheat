@@ -1,4 +1,4 @@
-#pragma once
+#pragma once 
 
 #include "include.hpp"
 
@@ -49,9 +49,7 @@ namespace
 		std::uint64_t get_pid_by_name( const wchar_t* name );
 
 		std::uintptr_t get_module_by_name( const wchar_t* name );
-
-		void move_mouse( float x , float y );
-
+		
 		__forceinline bool is_valid( const std::uintptr_t addr ){
 			if( addr >= 0x1000 && addr <= 0x7FFFFFFEFFFF )
 				return true;
@@ -64,7 +62,8 @@ namespace
 
 			return false;
 		}
-
+			
+		void update_screen_size( );
 
 		// setters
 		void set_base(std::uintptr_t base) noexcept; 
@@ -72,7 +71,9 @@ namespace
 		void set_process_handle(HANDLE hprocess) noexcept;
 		void set_memory_mode(bool _use_driver_) noexcept;
 		void set_version_game(const std::string& version) noexcept;
-		void set_screen_size( const sdk::geom::i_vec2 new_screen ) noexcept;
+		void set_screen_size( const sdk::geom::i_vec2& new_screen ) noexcept;
+		void set_mouse_pos( float x , float y );
+		void set_mouse_pos( sdk::geom::vec2 new_pos );
 
 		// getters
 		std::uintptr_t get_base() const noexcept;
@@ -80,7 +81,9 @@ namespace
 		HANDLE get_process_handle() const noexcept;
 		bool get_memory_mode() const noexcept;
 		const std::string& get_version_name() const noexcept;
-		const sdk::geom::i_vec2 get_screen_size( ) const noexcept;
+		const sdk::geom::i_vec2& get_screen_size( ) const noexcept;
+		const sdk::geom::i_vec2 get_mouse_pos( ) const noexcept;
+		
 	}; // memory_t
 	
 	

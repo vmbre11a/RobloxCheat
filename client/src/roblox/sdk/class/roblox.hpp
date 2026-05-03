@@ -7,7 +7,6 @@
 
 namespace
 	sdk{
-
 	
 	namespace 
 		roblox{
@@ -24,42 +23,44 @@ namespace
 			roblox_t( ) = default;
 			~roblox_t( ) = default;
 
-			void init( const std::uintptr_t base){
-				std::uintptr_t fake_data_model = memory::mem->rpm< std::uintptr_t >( base + offsets::FakeDataModelPointer );
+			bool init( const std::uintptr_t base){
+				std::uintptr_t fake_data_model = memory::mem->rpm< std::uintptr_t >( base + Offsets::FakeDataModel::Pointer );
 				if( !fake_data_model ){
 					printf("[ - ] f_d_model: zero\n");
-					return;
+					return false;
 				}
-				data_model = memory::mem->rpm< std::uintptr_t >( fake_data_model + offsets::FakeDataModelToDataModel );
+				data_model = memory::mem->rpm< std::uintptr_t >( fake_data_model + Offsets::FakeDataModel::RealDataModel );
 				if( !data_model.valid( ) ){
 					printf("[ - ] d_model: zero\n");
-					return;	
+					return false;	
 				}
-				render_engine = memory::mem->rpm< std::uintptr_t >( base + offsets::VisualEnginePointer );
+				render_engine = memory::mem->rpm< std::uintptr_t >( base + Offsets::VisualEngine::Pointer );
 				if( !render_engine.valid( ) ){
 					printf("[ - ] render_engine: zero\n");
-					return;
+					return false;
 				}
 				workspace = data_model.get_by_class( name::work_space );
 				if( !workspace.valid( ) ){
 					printf("[ - ] wspace: zero\n");
-					return;
+					return false;
 				}
 				players = data_model.get_by_class( name::players );
 				if( !players.valid( ) ){
 					printf("[ - ] players: zero\n");
-					return;
+					return false;
 				}	
 				camera = workspace.get_by_class( name::camera );
 				if( !camera.valid( ) ){
 					printf("[ - ] camera: zero\n");
-					return;
+					return false;
 				}
-				local_player = memory::mem->rpm< std::uintptr_t >(players.self + offsets::LocalPlayer );
+				local_player = memory::mem->rpm< std::uintptr_t >(players.self + Offsets::Player::LocalPlayer );
 				if( !local_player.valid( ) ){
 					printf("[ - ] l_player: zero\n");
-					return;
+					return false;
 				}
+
+				return true;
 			}
 
 			instance::instance_t& get_data_model( ) { return data_model; }

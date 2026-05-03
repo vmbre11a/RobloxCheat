@@ -30,14 +30,16 @@ namespace
 		inline void fill_cached( player_cached& c , std::string& name , sdk::instance::instance_t player ){
 			auto character = player.get_model_ref( );
 			c.character = character.self;
-			if( !character.self ) return;
+			if( !character.self || !memory::mem->is_valid( character.self ) ) return;
 			c.name = name;
 			c.humanoid = character.get_by_class( sdk::roblox::name::humanoid ).self;
 			c.root_part = character.get_by_name( sdk::roblox::name::hmd_root ).self;
-			c.max_health = memory::mem->rpm< int >( c.humanoid + offsets::MaxHealth );
+			c.max_health = memory::mem->rpm< int >( c.humanoid + Offsets::Humanoid::MaxHealth );
 		} // fill_cached
 
+
 		inline void update( ){
+
 			auto actors_list = sdk::roblox::rbx->get_players( ).get_childs( );
 		
 			std::unordered_set< std::string > active_name{ };

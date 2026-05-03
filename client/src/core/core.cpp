@@ -39,21 +39,16 @@ namespace
 		memory::mem->set_base( base );
 
 		if( print_process_info )
-			wprintf(L"[ ~ ] target_name: %ls\n[ ~ ] pid: %d\n[ ~ ] base: 0x%p\n", 
+			wprintf(L"[ ~ ] target_name: %ls\n[ ~ ] pid: %d\n[ ~ ] base: 0x%llx\n", 
 				process_name , 
-				pid , 
+				static_cast< int >( pid ), 
 				base );
 
-			
-		sdk::roblox::rbx->init( base ); // get base addr
+		if( !sdk::roblox::rbx->init( base ) ){ // get base addr
+			printf("[ - ] addr failed , maybe you no in place then need re-call \n");
+		}	
+		memory::mem->update_screen_size( );
 		
-		
-		sdk::geom::i_vec2 screen_size{ };
-		screen_size.x = GetSystemMetrics( 0 );
-		screen_size.y = GetSystemMetrics( 1 );
-		memory::mem->set_screen_size( screen_size );
-
-
 		overlay::menu->render_loop( ); // start render ( main loop )
 
 		return true;

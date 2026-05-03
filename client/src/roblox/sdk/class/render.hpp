@@ -19,7 +19,7 @@ namespace
 
 				geom::mat4 get_view_matrix( ){
 					return memory::mem->rpm< geom::mat4 >(
-						self  + offsets::viewmatrix);
+						self  + Offsets::VisualEngine::ViewMatrix);
 				}
 
 
